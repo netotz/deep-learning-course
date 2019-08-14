@@ -1,16 +1,15 @@
 # Data Preprocessing
 
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 
-# Importing the dataset
+# import the CSV data into a DataFrame
 dataset = pd.read_csv('Deep_Learning_A_Z/Get the Machine Learning basics/Data Preprocessing Template/Data.csv')
+# matriX of independent variables
 X = dataset.iloc[:, :-1].values
+# array of dependent variable (output)
 y = dataset.iloc[:, -1].values
 
 # handling missing data
@@ -18,10 +17,14 @@ imputer = SimpleImputer()
 imputer = imputer.fit(X[:, 1:3])
 X[:, 1:3] = imputer.transform(X[:, 1:3])
 
-# encoding categories
+# encoding categories:
+# categorical data must be represented as numbers
+# because ML models are mathematical
 lblEncoder = LabelEncoder()
 X[:, 0] = lblEncoder.fit_transform(X[:, 0])
 
+# some categorical data doesn't have order nor hierarchy,
+# it just needs a numerical format
 oneEncoder = OneHotEncoder(categorical_features = [0])
 X = oneEncoder.fit_transform(X).toarray()
 y = lblEncoder.fit_transform(y)
