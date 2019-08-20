@@ -28,17 +28,22 @@ y_predicted = classifier.predict(X_test)
 matrix = confusion_matrix(y_test, y_predicted)
 
 def plotPrediction(X_set, y_set):
+    # prepare each pixel
     age, salary = np.meshgrid(
         np.arange(X_set[:, 0].min() - 1, X_set[:, 0].max() + 1, 0.01),
         np.arange(X_set[:, 1].min() - 1, X_set[:, 1].max() + 1, 0.01)
     )
     arr = np.array([age.ravel(), salary.ravel()]).T
+    # colors for the background
     colors_back = ListedColormap(('red', 'green'))
+    # colors for the points
     colors_points = ListedColormap(('yellow', 'blue'))
-
+    # apply the classifier to every pixel
     plt.contourf(age, salary, classifier.predict(arr).reshape(age.shape), alpha = 0.75, cmap = colors_back)
+    # axes' limits
     plt.xlim(age.min(), age.max())
     plt.ylim(salary.min(), salary.max())
+    # plot data points (real values)
     for i, j in enumerate(np.unique(y_set)):
         plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = colors_points(i), label = j)
     plt.title('Logistic Regression')
