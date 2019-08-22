@@ -29,7 +29,9 @@ class Classifier:
         self.y_predicted = self.classifier.predict(self.X_test)
         self.matrix = confusion_matrix(self.y_test, self.y_predicted)
 
-    def plotPrediction(self, X_set, y_set):
+    def plotPrediction(self, X_set, y_set, title = "Classifier", x_label = "", y_label = ""):
+        '''Plots the prediction areas and the real observations.
+        '''
         # prepare each pixel
         age, salary = np.meshgrid(
             np.arange(X_set[:, 0].min() - 1, X_set[:, 0].max() + 1, 0.01),
@@ -48,8 +50,8 @@ class Classifier:
         # plot data points (real values)
         for i, j in enumerate(np.unique(y_set)):
             plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = colors_points(i), label = j)
-        plt.title('Logistic Regression')
-        plt.xlabel('Age')
-        plt.ylabel('Estimated salary')
+        plt.title(title)
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
         plt.legend()
         plt.show()
