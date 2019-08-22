@@ -7,7 +7,9 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
 
-class Classifier:
+class Classifier():
+    '''Classification template. Prepares necessary objects and variables from a CSV file.
+    '''
     def __init__(self, csv_path):
         # import the CSV data into a DataFrame
         self.dataset = read_csv(csv_path)
