@@ -10,10 +10,10 @@ import numpy as np
 class DataPreprocessor(object):
     '''Preprocesses necessary objects and variables from a CSV file.
     '''
-    def __init__(self, csv_path):
+    def __init__(self, csv_path, independ_vars):
         # import the CSV data into a DataFrame
         self.dataset = read_csv(csv_path)
-        self.X = self.dataset.iloc[:, 2:4].values
+        self.X = self.dataset.iloc[:, independ_vars].values
         self.y = self.dataset.iloc[:, -1].values
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y)
@@ -34,8 +34,8 @@ class DataPreprocessor(object):
 class Classifier(DataPreprocessor):
     '''Classification template which inherits attributes from DataPreprocessor, and has a function that plots the prediction.
     '''
-    def __init__(self, csv_path):
-        super().__init__(csv_path)
+    def __init__(self, csv_path, independ_vars):
+        super().__init__(csv_path, independ_vars)
 
     def plotPrediction(self, X_set, y_set, title = "Classifier", x_label = "", y_label = ""):
         '''Plots the prediction areas and the real observations.
