@@ -7,13 +7,13 @@ X = dataset.iloc[:, 3:13].values
 y = dataset.iloc[:, -1].values
 
 # encode countries to numbers
-# lblEncoder_countries = LabelEncoder()
-# X[:, 1] = lblEncoder_countries.fit_transform(X[:, 1])
-# # encode genders to numbers
-# lblEncoder_genders = LabelEncoder()
-# X[:, 2] = lblEncoder_genders.fit_transform(X[:, 2])
+lblEncoder_countries = LabelEncoder()
+X[:, 1] = lblEncoder_countries.fit_transform(X[:, 1])
+# encode genders to numbers
+lblEncoder_genders = LabelEncoder()
+X[:, 2] = lblEncoder_genders.fit_transform(X[:, 2])
 # encode countries' numbers to dummy variables
-oneEncoder = OneHotEncoder(categorical_features = [1, 2])
+oneEncoder = OneHotEncoder(categorical_features = [1])
 X = oneEncoder.fit_transform(X).toarray()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y)
