@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
 
-class Classifier():
-    '''Classification template. Prepares necessary objects and variables from a CSV file.
+class DataPreprocessor(object):
+    '''Preprocesses necessary objects and variables from a CSV file.
     '''
     def __init__(self, csv_path):
         # import the CSV data into a DataFrame
@@ -30,6 +30,12 @@ class Classifier():
         # predicted values based on self.X_test
         self.y_predicted = self.classifier.predict(self.X_test)
         self.matrix = confusion_matrix(self.y_test, self.y_predicted)
+
+class Classifier(DataPreprocessor):
+    '''Classification template which inherits attributes from DataPreprocessor, and has a function that plots the prediction.
+    '''
+    def __init__(self, csv_path):
+        super().__init__(csv_path)
 
     def plotPrediction(self, X_set, y_set, title = "Classifier", x_label = "", y_label = ""):
         '''Plots the prediction areas and the real observations.
