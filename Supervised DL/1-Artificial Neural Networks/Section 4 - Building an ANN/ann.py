@@ -15,6 +15,7 @@ X[:, 2] = lblEncoder_genders.fit_transform(X[:, 2])
 # encode countries' numbers to dummy variables
 oneEncoder = OneHotEncoder(categorical_features = [1])
 X = oneEncoder.fit_transform(X).toarray()
+X = X[:, 1:]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
