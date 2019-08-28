@@ -27,4 +27,11 @@ scaler = scaler.fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
+# initialize the neural network
 classifier = Sequential()
+# create hidden layer:
+# 6 nodes = average of nodes in input + nodes in output
+# activation function: rectifier (relu)
+# uniform method to randomly initialize weights
+hidden_layer = Dense(6, activation = 'relu', kernel_initializer = 'uniform')
+classifier.add(hidden_layer)
