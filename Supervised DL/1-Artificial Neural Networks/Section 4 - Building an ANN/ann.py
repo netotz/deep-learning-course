@@ -1,6 +1,9 @@
 from pandas import read_csv
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
 
 dataset = read_csv('Supervised DL/1-Artificial Neural Networks/Section 4 - Building an ANN/Churn_Modelling.csv')
 X = dataset.iloc[:, 3:13].values
@@ -23,3 +26,5 @@ scaler = StandardScaler()
 scaler = scaler.fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
+
+classifier = Sequential()
