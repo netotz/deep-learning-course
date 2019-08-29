@@ -2,6 +2,7 @@ from pandas import read_csv
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
@@ -48,4 +49,9 @@ classifier.add(out_layer)
 # set parameters to create NN
 classifier.compile('adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 # fit the model into dataset
-classifier.fit(X_train, y_train, batch_size = 10, nb_epoch = 100)
+classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
+# predicted values as a probability
+y_pred = classifier.predict(X_test)
+y_truefalse = (y_pred > 0.5)
+# confussion matrix to check accuracy
+matrix = confusion_matrix(y_test, y_truefalse)
