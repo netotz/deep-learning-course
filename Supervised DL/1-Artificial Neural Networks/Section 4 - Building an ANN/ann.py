@@ -49,9 +49,26 @@ classifier.add(out_layer)
 # set parameters to create NN
 classifier.compile('adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 # fit the model into dataset
-classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
+classifier.fit(X_train, y_train, batch_size = 10, epochs = 30)
 # predicted values as a probability
 y_pred = classifier.predict(X_test)
 y_truefalse = (y_pred > 0.5)
 # confussion matrix to check accuracy
 matrix = confusion_matrix(y_test, y_truefalse)
+
+# exercise
+"""Predict if the customer with the following informations will leave the bank:
+Geography: France
+Credit Score: 600
+Gender: Male
+Age: 40
+Tenure: 3
+Balance: 60000
+Number of Products: 2
+Has Credit Card: Yes
+Is Active Member: Yes
+Estimated Salary: 50000"""
+new_observation = np.array([[0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])
+scaled_observation = scaler.transform(new_observation)
+predict_observation = classifier.predict(scaled_observation)
+binary_observation = (predict_observation > 0.5)
